@@ -1,0 +1,37 @@
+package com.sri.cricbuzzandroidapp.utils;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+
+public class ApplicationSettings {
+
+	private static final String SETTINGS_NAME="CricBuzzChallenge";
+	private static SharedPreferences pref=null;
+
+	public static final String PLAYLIST_JSON = "playlist_json";
+
+	private static SharedPreferences getSharedPreferences(Context context)
+	{
+		if(pref==null)
+			pref=context.getSharedPreferences(SETTINGS_NAME, Context.MODE_PRIVATE);
+
+		return pref;
+	}
+
+	private static SharedPreferences getSharePreferences(Context context)
+	{
+		return getSharedPreferences(context);
+	}
+
+	public static String getCurrentPlaylistName(Context context)
+	{
+		return getSharePreferences(context).getString(CURRENT_PLAYLIST_NAME,null);
+	}
+	
+	public static void setCurrentPlaylistName(Context context, String value)
+	{
+		SharedPreferences.Editor editor=getSharePreferences(context).edit();
+		editor.putString(CURRENT_PLAYLIST_NAME, value);
+		editor.commit();
+	}
+}

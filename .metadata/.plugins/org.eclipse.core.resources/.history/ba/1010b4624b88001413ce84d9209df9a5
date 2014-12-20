@@ -1,0 +1,29 @@
+package com.sri.cricbuzzandroidapp;
+
+import android.os.Bundle;
+
+import com.sri.cricbuzzandroidapp.json.Playlist.Player;
+import com.sri.cricbuzzandroidapp.utils.ApplicationSettings;
+
+public class PlayerProfile extends BaseActivity {
+
+	private Player player;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		addContentView(R.layout.activity_playerprofile);
+		initUI();
+		initComponents();
+	}
+
+	private void initUI() {
+
+	}
+
+	private void initComponents() {
+		selectedJson = ApplicationSettings.getSelectedJson(this);
+		showBack();
+		setTitleBar(title);
+	}
+}

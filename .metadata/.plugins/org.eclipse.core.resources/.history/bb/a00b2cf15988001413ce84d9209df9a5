@@ -1,0 +1,30 @@
+package com.sri.cricbuzzandroidapp.json;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class Profile {
+
+	private JSONObject profileInfo, odiStats, testStats, t20Stats;
+
+	public Profile(String json) throws JSONException {
+		this(new JSONObject(json));
+	}
+
+	public Profile(JSONObject object) {
+		this.profileInfo = object.getJSONObject(JSONKeys.PLAYER_INFO);
+		try {
+			this.odiStats = object.getJSONObject(JSONKeys.ODI_STATS);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.testStats = object.getJSONObject(JSONKeys.TEST_STATS);
+		this.t20Stats = object.getJSONObject(JSONKeys.T20_STATS);
+	}
+
+	public JSONObject PlayerInfo() {
+
+	}
+
+}

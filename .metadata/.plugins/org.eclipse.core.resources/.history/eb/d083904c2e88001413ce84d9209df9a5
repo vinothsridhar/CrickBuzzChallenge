@@ -1,0 +1,143 @@
+package com.sri.cricbuzzandroidapp.utils;
+
+import com.sri.musicplayer.folderplayer.bean.RepeatType;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+
+public class ApplicationSettings {
+
+	private static final String SETTINGS_NAME="Musician";
+	private static final String SONGS_ISLOADED="songs_is_loaded";
+	private static final String PLAYLIST_APPEND="playlist_append";
+	private static final String CURRENT_PLAYLIST_ID="current_playlist_id";
+	private static final String CURRENT_PLAYLIST_NAME="current_playlist_name";
+	private static final String SHUFFLE_STATUS="shuffle_status";
+	private static final String REPEAT_STATUS="repeat_status";
+	private static final String PLAYER_STATE="Player_state";
+	private static final String REVIEW_DONOT_ASK_AGAIN = "review_donot_ask_again";
+	private static final String REVIEW_REMIND_LATER_TIME = "review_remind_later_time";
+	private static SharedPreferences pref=null;
+
+	private static SharedPreferences getSharedPreferences(Context context)
+	{
+		if(pref==null)
+			pref=context.getSharedPreferences(SETTINGS_NAME, Context.MODE_PRIVATE);
+
+		return pref;
+	}
+
+	private static SharedPreferences getSharePreferences(Context context)
+	{
+		return getSharedPreferences(context);
+	}
+
+	public static boolean getisSongsLoaded(Context context)
+	{
+		return getSharePreferences(context).getBoolean(SONGS_ISLOADED, false);
+	}
+
+	public static void setisSongsLoaded(Context context,boolean bool)
+	{
+		SharedPreferences.Editor editor=getSharePreferences(context).edit();
+		editor.putBoolean(SONGS_ISLOADED, bool);
+		editor.commit();
+	}
+
+	public static int getPlaylistAppend(Context context)
+	{
+		return getSharePreferences(context).getInt(PLAYLIST_APPEND, 1);
+	}
+
+	public static void setPlaylistAppend(Context context,int append)
+	{
+		SharedPreferences.Editor editor=getSharePreferences(context).edit();
+		editor.putInt(PLAYLIST_APPEND, append);
+		editor.commit();
+	}
+
+	public static int getCurrentPlaylistId(Context context)
+	{
+		return getSharePreferences(context).getInt(CURRENT_PLAYLIST_ID, 0);
+	}
+
+	public static void setCurrentPlaylistId(Context context, int value)
+	{
+		SharedPreferences.Editor editor=getSharePreferences(context).edit();
+		editor.putInt(CURRENT_PLAYLIST_ID, value);
+		editor.commit();
+	}
+
+	public static String getCurrentPlaylistName(Context context)
+	{
+		return getSharePreferences(context).getString(CURRENT_PLAYLIST_NAME,null);
+	}
+
+	public static void setCurrentPlaylistName(Context context, String value)
+	{
+		SharedPreferences.Editor editor=getSharePreferences(context).edit();
+		editor.putString(CURRENT_PLAYLIST_NAME, value);
+		editor.commit();
+	}
+
+	public static boolean getShuffleStatus(Context context)
+	{
+		return getSharePreferences(context).getBoolean(SHUFFLE_STATUS, false);
+	}
+
+	public static void setShuffleStatus(Context context, boolean value)
+	{
+		SharedPreferences.Editor editor=getSharePreferences(context).edit();
+		editor.putBoolean(SHUFFLE_STATUS, value);
+		editor.commit();
+	}
+
+	public static String getCurrentPlayerState(Context context)
+	{
+		return getSharePreferences(context).getString(PLAYER_STATE, Constants.ACTION_PAUSE);
+	}
+
+	public static void setCurrentPlayerState(Context context,String state)
+	{
+		SharedPreferences.Editor editor=getSharePreferences(context).edit();
+		editor.putString(PLAYER_STATE, state);
+		editor.commit();
+	}
+
+	public static String getRepeatStatus(Context context)
+	{
+		return getSharePreferences(context).getString(REPEAT_STATUS, RepeatType.REPEAT_OFF.toString());
+	}
+
+	public static void setRepeatStatus(Context context, String value)
+	{
+		SharedPreferences.Editor editor=getSharePreferences(context).edit();
+		editor.putString(REPEAT_STATUS, value);
+		editor.commit();
+	}
+
+	public static boolean getReviewDonotAskAgain(Context context)
+	{
+		return getSharePreferences(context).getBoolean(REVIEW_DONOT_ASK_AGAIN, false);
+	}
+
+	public static void setReviewDonotAskAgain(Context context, boolean value)
+	{
+		SharedPreferences.Editor editor=getSharePreferences(context).edit();
+		editor.putBoolean(REVIEW_DONOT_ASK_AGAIN, value);
+		editor.commit();
+	}
+
+	public static long getReviewRemindLaterTime(Context context)
+	{
+		return getSharePreferences(context).getLong(REVIEW_REMIND_LATER_TIME, 0);
+	}
+
+	public static void setReviewRemindLaterTime(Context context, long value)
+	{
+		SharedPreferences.Editor editor=getSharePreferences(context).edit();
+		editor.putLong(REVIEW_REMIND_LATER_TIME, value);
+		editor.commit();
+	}
+
+}

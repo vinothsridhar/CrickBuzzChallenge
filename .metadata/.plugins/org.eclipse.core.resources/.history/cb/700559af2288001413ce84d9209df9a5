@@ -1,0 +1,9 @@
+package com.sri.gcmlib.server;
+
+public interface ConnectionListener {
+
+	public void OnSuccess(String result);
+	public void OnFailure(String error,int status);
+	public void OnConnectionError(int errorCode);
+	
+}

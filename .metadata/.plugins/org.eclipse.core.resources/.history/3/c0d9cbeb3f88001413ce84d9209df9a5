@@ -1,0 +1,37 @@
+package com.sri.cricbuzzandroidapp.db;
+
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+public class DBHelper extends SQLiteOpenHelper {
+
+	public static final String FAVORITE_TABLE="favorite";
+	public static final String ID="player_id";
+
+	public static final String DATABASE="local.db";
+	public static final int VERSION=1;
+
+	public static final String FAV_CREATE="create table " + FAVORITE_TABLE + "(" + ID + " varchar not null);";
+		public DBHelper(Context context) {
+		super(context, DATABASE,null,VERSION);
+	}
+
+	@Override
+	public void onCreate(SQLiteDatabase db) {
+		// TODO Auto-generated method stub
+		db.execSQL(FAV_CREATE);
+	}
+
+	@Override
+	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+		// TODO Auto-generated method stub
+		Log.w("TaskDBAdapter", "Upgrading from version "+oldVersion
+				+" to "+newVersion
+				+", which will destroy all old data");
+				onCreate(db);
+
+	}
+
+}

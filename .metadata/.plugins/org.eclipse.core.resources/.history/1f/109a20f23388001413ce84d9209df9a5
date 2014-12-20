@@ -1,0 +1,24 @@
+package com.sri.cricbuzzandroidapp;
+
+import android.os.Bundle;
+
+public class PlaylistActivity extends BaseActivity {
+
+	private Playlist playlist;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		addContentView(R.layout.activity_playerprofile);
+		initUI();
+		initComponents();
+	}
+
+	private void initUI() {
+
+	}
+
+	private void initComponents() {
+		showHome();
+		setTitleBar("FavPlayer");
+	}
+}

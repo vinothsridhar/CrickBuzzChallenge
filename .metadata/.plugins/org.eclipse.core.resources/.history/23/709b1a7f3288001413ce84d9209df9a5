@@ -1,0 +1,51 @@
+package com.sri.cricbuzzandroidapp.json;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class Playlist {
+
+	public Playlist(String jsonString) throws JSONException {
+		this(new JSONArray(jsonString));
+	}
+
+	public Playlist(JSONArray jsonArray) {
+
+	}
+
+	public class Player {
+
+		private JSONObject playerObject;
+		public Player(JSONObject jsonObject) {
+			this.playerObject = jsonObject;
+		}
+
+		public String getId() {
+			try {
+				return playerObject.getString("id");
+			} catch (JSONException e) {
+				return null;
+			}
+		}
+
+		public String getName() {
+			try {
+				return playerObject.getString("name");
+			} catch (JSONException e) {
+				return null;
+			}
+		}
+
+		public String getProfileUrl() {
+			try {
+				return playerObject.getString("url");
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+}

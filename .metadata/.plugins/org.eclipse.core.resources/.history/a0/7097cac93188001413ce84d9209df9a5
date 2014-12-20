@@ -1,0 +1,9 @@
+package com.sri.cricbuzzandroidapp.json;
+
+public class Playlist {
+
+	public Playlist(String json) {
+
+	}
+
+}

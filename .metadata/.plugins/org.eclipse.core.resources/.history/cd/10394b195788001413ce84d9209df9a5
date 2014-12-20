@@ -1,0 +1,15 @@
+package com.sri.cricbuzzandroidapp.json;
+
+import org.json.JSONObject;
+
+public class Profile {
+
+	public Profile(String json) {
+		this(new Profile(json));
+	}
+
+	public Profile(JSONObject object) {
+
+	}
+
+}

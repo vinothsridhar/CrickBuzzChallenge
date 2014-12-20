@@ -1,0 +1,15 @@
+package com.sri.cricbuzzandroidapp.json;
+
+import org.json.JSONObject;
+
+public class Playlist {
+
+	public Playlist(String jsonString) {
+		this(new JSONObject(jsonString));
+	}
+
+	public Playlist(JSONObject jsonObject) {
+
+	}
+
+}

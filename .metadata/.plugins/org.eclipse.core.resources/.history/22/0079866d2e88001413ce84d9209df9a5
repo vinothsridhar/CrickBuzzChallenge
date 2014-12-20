@@ -1,0 +1,24 @@
+package com.sri.cricbuzzandroidapp.utils;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+
+public class ApplicationSettings {
+
+	private static final String SETTINGS_NAME="CricBuzzChallenge";
+	private static SharedPreferences pref=null;
+
+	private static SharedPreferences getSharedPreferences(Context context)
+	{
+		if(pref==null)
+			pref=context.getSharedPreferences(SETTINGS_NAME, Context.MODE_PRIVATE);
+
+		return pref;
+	}
+
+	private static SharedPreferences getSharePreferences(Context context)
+	{
+		return getSharedPreferences(context);
+	}
+
+}

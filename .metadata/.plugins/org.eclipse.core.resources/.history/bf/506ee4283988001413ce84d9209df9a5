@@ -1,0 +1,47 @@
+package com.sri.cricbuzzandroidapp;
+
+import java.util.ArrayList;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.widget.LinearLayout;
+
+import com.sri.cricbuzzandroidapp.json.Playlist;
+import com.sri.cricbuzzandroidapp.json.Playlist.Player;
+
+public class PlaylistActivity extends BaseActivity {
+
+	private Playlist playlist;
+	private LinearLayout playlistLayout;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		addContentView(R.layout.activity_playerprofile);
+		initUI();
+		initComponents();
+	}
+
+	private void initUI() {
+		playlistLayout = (LinearLayout) findViewById(R.id.playlistLayout);
+	}
+
+	private void initComponents() {
+		showHome();
+		setTitleBar("FavPlayer");
+		playlist = getPlaylist();
+		renderPlaylist();
+	}
+
+	private void renderPlaylist() {
+		ArrayList<Player> players = playlist.getPlayers();
+		if (players == null) {
+			return;
+		}
+
+		static LayoutInflater inflater = LayoutInflater.from(this);
+		for (int i=0; i<players.size(); i++) {
+			View v =
+		}
+	}
+}

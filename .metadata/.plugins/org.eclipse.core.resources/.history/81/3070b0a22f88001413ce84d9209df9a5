@@ -1,0 +1,21 @@
+package com.sri.cricbuzzandroidapp;
+
+import android.os.Bundle;
+
+public class Playlist extends BaseActivity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		addContentView(R.layout.activity_playerprofile);
+		initUi();
+	}
+
+	private void initUi() {
+
+	}
+
+	private void initComponents() {
+
+	}
+}

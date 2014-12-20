@@ -1,0 +1,34 @@
+package com.sri.cricbuzzandroidapp.utils;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.provider.SyncStateContract.Constants;
+
+public class ApplicationSettings {
+
+	private static final String SETTINGS_NAME="Musician";
+	private static final String SONGS_ISLOADED="songs_is_loaded";
+	private static final String PLAYLIST_APPEND="playlist_append";
+	private static final String CURRENT_PLAYLIST_ID="current_playlist_id";
+	private static final String CURRENT_PLAYLIST_NAME="current_playlist_name";
+	private static final String SHUFFLE_STATUS="shuffle_status";
+	private static final String REPEAT_STATUS="repeat_status";
+	private static final String PLAYER_STATE="Player_state";
+	private static final String REVIEW_DONOT_ASK_AGAIN = "review_donot_ask_again";
+	private static final String REVIEW_REMIND_LATER_TIME = "review_remind_later_time";
+	private static SharedPreferences pref=null;
+
+	private static SharedPreferences getSharedPreferences(Context context)
+	{
+		if(pref==null)
+			pref=context.getSharedPreferences(SETTINGS_NAME, Context.MODE_PRIVATE);
+
+		return pref;
+	}
+
+	private static SharedPreferences getSharePreferences(Context context)
+	{
+		return getSharedPreferences(context);
+	}
+
+}

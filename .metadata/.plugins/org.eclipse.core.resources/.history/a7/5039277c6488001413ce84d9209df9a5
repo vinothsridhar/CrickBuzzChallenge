@@ -1,0 +1,94 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <include
+        android:id="@+id/topItem"
+        layout="@layout/playlist_item" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/topItem" >
+
+        <ProgressBar
+            android:id="@+id/profileProgress"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true" />
+        
+        <TextView 
+            android:id="@+id/networkError"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="@string/error_text"/>
+
+        <RelativeLayout
+            android:id="@+id/profileInfo"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+            
+            <ScrollView 
+                android:id="@+id/detailsScrollView"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_above="@+id/buttonLayout">
+            
+	            <LinearLayout 
+	                android:id="@+id/details"
+	                android:layout_width="fill_parent"
+	                android:layout_height="wrap_content"
+	                android:padding="5dp"
+	                android:orientation="vertical">
+	                
+	            </LinearLayout>
+            
+            </ScrollView>
+
+            <LinearLayout
+                android:id="@+id/buttonLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Button"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/info_text" />
+                
+                <Button
+                    android:id="@+id/test"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Button"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/test_text" />
+
+                <Button
+                    android:id="@+id/odi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Button"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/odi_text" />
+
+                <Button
+                    android:id="@+id/t20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Button"
+                    android:text="@string/t20_text" />
+                
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

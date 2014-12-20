@@ -1,0 +1,18 @@
+package com.sri.cricbuzzandroidapp.utils;
+
+import java.util.Map;
+
+public class ServerUtils {
+
+	public static final String PLAYLIST_URL="http://m.cricbuzz.com/interview/playerlist";
+	public static final String PLAYERPROFILE_URL="http://m.cricbuzz.com/interview/playerProfile/2239";
+	
+	public static String getUrlParams(Map<String,String> params) {
+		StringBuilder urlParams=new StringBuilder();
+		for(String key : params.keySet()) {
+			urlParams.append(key).append("=").append(params.get(key)).append("&");
+		}
+		return urlParams.toString();
+	}	
+	
+}

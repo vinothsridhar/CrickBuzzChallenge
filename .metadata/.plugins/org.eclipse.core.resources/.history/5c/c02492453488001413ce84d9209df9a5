@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">CricBuzzAndroidApp</string>
+	<string name="loading_playlist_text">Loading Playlist</string>
+	<string name="total_players_text">Total Players: %1$s.</string>
+	<string name="total_players_text">Total Players: %1$s.</string>
+</resources>

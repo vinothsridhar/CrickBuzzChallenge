@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">CricBuzzAndroidApp</string>
+	<string name="loading_playlist_text">Loading Playlist</string>
+	<string name="dialog_review_msg">Hey buddy, Your using our app for last %1$s. Thank you very much for that. If you like our app, Please review our app in Google play store. This will help us to improve our app based on your reviews and your friends also will know your using our app.</string>
+</resources>

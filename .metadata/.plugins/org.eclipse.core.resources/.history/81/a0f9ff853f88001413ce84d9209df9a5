@@ -1,0 +1,136 @@
+package com.sri.cricbuzzandroidapp.db;
+
+import java.io.IOException;
+
+import android.app.Activity;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
+public class GetDB extends Activity
+{
+	Context context;
+	SQLiteDatabase mydb;
+	DBHelper dbhelper;
+
+	public GetDB(Context c)
+	{
+		this.context=c;
+		dbhelper=new DBHelper(c);
+	}
+
+	public void close()
+	{
+		mydb.close();
+	}
+
+	public void openDB() throws IOException
+	{
+	     mydb=dbhelper.getWritableDatabase();
+	}
+
+	public boolean addFavorite(String player_id)
+	{
+		long rowid=0;
+		ContentValues con=new ContentValues();
+		con.put(DBHelper.ID, player_id);
+
+		rowid=mydb.insert(DBHelper.FAVORITE_TABLE, null, con);
+		if(rowid==0)
+			return false;
+		else
+			return true;
+	}
+
+	public boolean isFavorite(int mythid)
+	{
+		Cursor cursor=mydb.rawQuery("select * from "+DBHelper.FAVORITE_TABLE+" where "+DBHelper.MYTHID+"="+mythid, null);
+		if(cursor.getCount()>0)
+			return true;
+		else
+			return false;
+	}
+
+	public void removeFavorite(int mythid)
+	{
+		mydb.execSQL("delete from "+DBHelper.FAVORITE_TABLE+" where "+DBHelper.MYTHID+"="+mythid);
+	}
+
+	public Cursor getFavorite()
+	{
+		Cursor c = null;
+		c=mydb.rawQuery("select * from "+DBHelper.FAVORITE_TABLE+" order by "+DBHelper.MYTHID, null);
+		return c;
+	}
+
+	public boolean addGroup(String group)
+	{
+		Cursor c=mydb.rawQuery("select * from "+DBHelper.GROUP_TABLE+" where group_name like '"+group+"'", null);
+		if(c.getCount()>0)
+			return false;
+		long rowid=0;
+		ContentValues con=new ContentValues();
+		con.put(DBHelper.GROUP, group);
+
+		rowid=mydb.insert(DBHelper.GROUP_TABLE, null, con);
+		if(rowid==0)
+			return false;
+		else
+			return true;
+	}
+
+	public Cursor getGroup()
+	{
+		Cursor c = null;
+		c=mydb.rawQuery("select * from "+DBHelper.GROUP_TABLE+" order by "+DBHelper.ID, null);
+		return c;
+	}
+
+	public boolean saveMyth(int gid,int mythid,String myth,String truth)
+	{
+		Cursor c=mydb.rawQuery("select * from "+DBHelper.SAVE_TABLE+" where "+DBHelper.GROUPID+"="+gid+" and "+DBHelper.MYTHID+"="+mythid, null);
+		if(c.getCount()>0)
+			return false;
+		long rowid=0;
+		ContentValues con=new ContentValues();
+		con.put(DBHelper.GROUPID, gid);
+		con.put(DBHelper.MYTHID, mythid);
+		con.put(DBHelper.MYTH, myth);
+		con.put(DBHelper.TRUTH, truth);
+
+		rowid=mydb.insert(DBHelper.SAVE_TABLE, null, con);
+		if(rowid==0)
+			return false;
+		else
+			return true;
+	}
+
+	public Cursor getMyth()
+	{
+		Cursor c = null;
+		c=mydb.rawQuery("select * from "+DBHelper.SAVE_TABLE+" order by "+DBHelper.ID+" desc", null);
+		return c;
+	}
+
+	public Cursor getMythByGroup(int groupid)
+	{
+		Cursor c = null;
+		if(groupid==0)
+			c=mydb.rawQuery("select * from "+DBHelper.SAVE_TABLE+" order by "+DBHelper.ID+" desc", null);
+		else
+			c=mydb.rawQuery("select * from "+DBHelper.SAVE_TABLE+" where "+DBHelper.GROUPID+"="+groupid+" order by "+DBHelper.ID+" desc", null);
+		return c;
+	}
+
+	public Cursor getMythByGroupAndMyth(int groupid,String myth)
+	{
+		Cursor c = null;
+		if(groupid==0)
+			c=mydb.rawQuery("select * from "+DBHelper.SAVE_TABLE+" where "+DBHelper.MYTH+" like '"+myth+"%' order by "+DBHelper.ID+" desc", null);
+		else
+			c=mydb.rawQuery("select * from "+DBHelper.SAVE_TABLE+" where "+DBHelper.GROUPID+"="+groupid+" and "+DBHelper.MYTH+" like '"+myth+"%' order by "+DBHelper.ID+" desc", null);
+		return c;
+	}
+
+}

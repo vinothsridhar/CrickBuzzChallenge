@@ -1,0 +1,70 @@
+package com.sri.cricbuzzandroidapp;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.sri.cricbuzzandroidapp.utils.L;
+
+public class BaseActivity extends Activity {
+
+	private final String TAG = this.getClass().getSimpleName();
+
+	//Layouts
+	protected LinearLayout topLayout,totalLayout,contentLayout;
+	protected TextView titleBarText, totalPlayersText, favoritePlayersText;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		L.d(TAG, "Inside oncreate()");
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_base);
+	}
+
+	public void init() {
+		initUI();
+		initComponents();
+	}
+
+	private void initUI() {
+		topLayout = (LinearLayout) findViewById(R.id.topLayout);
+		totalLayout = (LinearLayout) findViewById(R.id.totalLayout);
+		contentLayout = (LinearLayout) findViewById(R.id.contentLayout);
+	}
+
+	private void initComponents() {
+
+	}
+
+	@Override
+	protected void onStart() {
+		L.d(TAG, "Inside onStart()");
+		super.onStart();
+	}
+
+	@Override
+	protected void onResume() {
+		L.d(TAG, "Inside onResume()");
+		super.onResume();
+	}
+
+	@Override
+	protected void onPause() {
+		L.d(TAG, "Inside onPause()");
+		super.onPause();
+	}
+
+	@Override
+	protected void onStop() {
+		L.d(TAG, "Inside onStop()");
+		super.onStop();
+	}
+
+	@Override
+	public void finish() {
+		L.d(TAG, "Inside finish()");
+		super.finish();
+	}
+
+}

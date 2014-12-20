@@ -1,0 +1,137 @@
+package com.sri.cricbuzzandroidapp;
+
+import org.json.JSONException;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.sri.cricbuzzandroidapp.json.Playlist;
+import com.sri.cricbuzzandroidapp.utils.ApplicationSettings;
+import com.sri.cricbuzzandroidapp.utils.L;
+
+public class BaseActivity extends Activity {
+
+	private final String TAG = this.getClass().getSimpleName();
+
+	//Layouts
+	protected LinearLayout topLayout,totalLayout;
+	protected RelativeLayout contentLayout;
+	protected TextView titleBarText, totalPlayersText, favoritePlayersText;
+	protected ImageButton homeButton, backButton;
+
+	private Playlist playerPlaylist;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		L.d(TAG, "Inside oncreate()");
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_base);
+		init();
+	}
+
+	private void init() {
+		initUI();
+		initComponents();
+	}
+
+	private void initUI() {
+		topLayout = (LinearLayout) findViewById(R.id.topLayout);
+		totalLayout = (LinearLayout) findViewById(R.id.totalLayout);
+		contentLayout = (RelativeLayout) findViewById(R.id.contentLayout);
+
+		titleBarText = (TextView) findViewById(R.id.titlebar);
+		totalPlayersText = (TextView) findViewById(R.id.totalPlayers);
+		favoritePlayersText = (TextView) findViewById(R.id.totalFavourite);
+
+		homeButton = (ImageButton) findViewById(R.id.home);
+		backButton = (ImageButton) findViewById(R.id.back);
+
+		backButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
+	}
+
+	private void initComponents() {
+		try {
+			playerPlaylist = new Playlist(ApplicationSettings.getPlaylistJson(this), this);
+		} catch (JSONException e) {
+			playerPlaylist = null;
+		}
+
+		totalPlayersText.setText(String.format(getString(R.string.total_players_text), "" + playerPlaylist.getTotalPlayers()));
+		favoritePlayersText.setText(String.format(getString(R.string.total_favorites_text), "" + ApplicationSettings.getFavoritePlayer(this).size()));
+	}
+
+	protected Playlist getPlaylist() {
+		return playerPlaylist;
+	}
+
+	protected void showHome() {
+		homeButton.setVisibility(View.VISIBLE);
+		homeButton.setClickable(false);
+		backButton.setVisibility(View.GONE);
+	}
+
+	protected void showBack() {
+		homeButton.setVisibility(View.GONE);
+		backButton.setVisibility(View.VISIBLE);
+	}
+
+	protected void setTitleBar(String title) {
+		titleBarText.setText(title);
+	}
+
+	protected void addContentView(int id) {
+		contentLayout.addView(getLayoutInflater().inflate(id, null));
+	}
+	
+	protected void updateFavoritePlayer() {
+		
+	}
+
+	@Override
+	protected void onStart() {
+		L.d(TAG, "Inside onStart()");
+		super.onStart();
+	}
+
+	@Override
+	protected void onResume() {
+		L.d(TAG, "Inside onResume()");
+		super.onResume();
+	}
+
+	@Override
+	protected void onPause() {
+		L.d(TAG, "Inside onPause()");
+		super.onPause();
+	}
+
+	@Override
+	protected void onStop() {
+		L.d(TAG, "Inside onStop()");
+		super.onStop();
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+	}
+
+	@Override
+	public void finish() {
+		L.d(TAG, "Inside finish()");
+		super.finish();
+	}
+
+}

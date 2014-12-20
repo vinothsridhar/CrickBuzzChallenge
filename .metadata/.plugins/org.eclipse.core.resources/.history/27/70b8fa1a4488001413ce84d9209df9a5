@@ -1,0 +1,87 @@
+package com.sri.cricbuzzandroidapp.json;
+
+import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.sri.cricbuzzandroidapp.db.GetDB;
+
+public class Playlist {
+
+	private ArrayList<Player> players = new ArrayList<Player>();
+	private JSONArray favoriteArray;
+	private GetDB db;
+
+	public Playlist(String jsonString, String favoriteString, GetDB myGetDB) throws JSONException {
+		this(new JSONArray(jsonString), favoriteString, myGetDB);
+	}
+
+	public Playlist(JSONArray jsonArray, String favoriteString, GetDB db) {
+		this.db = db;
+		try {
+			this.favoriteArray = new JSONArray(favoriteString);
+		} catch (JSONException e1) {
+			this.favoriteArray = new JSONArray();
+		}
+		for (int i=0; i<jsonArray.length(); i++) {
+			try {
+				Player player = new Player(jsonArray.getJSONObject(i));
+				players.add(player);
+			} catch (JSONException e) {
+
+			}
+		}
+	}
+
+	public ArrayList<Player> getPlayers() {
+		return players;
+	}
+
+	public int getTotalPlayers() {
+		return players == null ? 0 : players.size();
+	}
+
+	public class Player {
+
+		private JSONObject playerObject;
+		public Player(JSONObject jsonObject) {
+			this.playerObject = jsonObject;
+		}
+
+		public String getId() {
+			try {
+				return playerObject.getString("id");
+			} catch (JSONException e) {
+				return null;
+			}
+		}
+
+		public String getName() {
+			try {
+				return playerObject.getString("name");
+			} catch (JSONException e) {
+				return null;
+			}
+		}
+
+		public String getProfileUrl() {
+			try {
+				return playerObject.getString("url");
+			} catch (JSONException e) {
+				return null;
+			}
+		}
+
+		public boolean isFavorite() {
+			if (db.isFavorite(Integer.parseInt(getId()))) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+	}
+
+}

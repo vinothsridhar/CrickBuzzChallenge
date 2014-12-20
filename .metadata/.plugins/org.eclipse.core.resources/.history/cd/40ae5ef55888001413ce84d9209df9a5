@@ -1,0 +1,20 @@
+package com.sri.cricbuzzandroidapp.json;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class Profile {
+
+	public Profile(String json) throws JSONException {
+		this(new JSONObject(json));
+	}
+
+	public Profile(JSONObject object) {
+
+	}
+
+	public String PlayerInfo() {
+		
+	}
+
+}

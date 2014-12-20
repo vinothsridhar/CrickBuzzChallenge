@@ -1,0 +1,12 @@
+package com.sri.cricbuzzandroidapp.json;
+
+public class JSONKeys {
+
+	public static final String PLAYER_INFO = "playerInfo";
+	public static final String TEAM = "team";
+	public static final String FULL_NAME = "fullName";
+	public static final String PLAYER_ROLE = "player_role";
+	public static final String IMAGE_NAME = "imageName";
+	public static final String BAT_STYLE  = "playerBatStyle";
+
+}

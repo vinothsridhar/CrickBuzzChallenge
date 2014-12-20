@@ -1,0 +1,23 @@
+package com.sri.cricbuzzandroidapp;
+
+import android.os.Bundle;
+
+public class PlayerProfile extends BaseActivity {
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		addContentView(R.layout.activity_playerprofile);
+		initUI();
+		initComponents();
+	}
+
+	private void initUI() {
+
+	}
+
+	private void initComponents() {
+		showBack();
+		setTitleBar(title);
+	}
+}

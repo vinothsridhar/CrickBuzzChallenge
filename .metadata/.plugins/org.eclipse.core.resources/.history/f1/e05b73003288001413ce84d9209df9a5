@@ -1,0 +1,16 @@
+package com.sri.cricbuzzandroidapp.json;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+public class Playlist {
+
+	public Playlist(String jsonString) throws JSONException {
+		this(new JSONArray(jsonString));
+	}
+
+	public Playlist(JSONArray jsonArray) {
+		
+	}
+
+}

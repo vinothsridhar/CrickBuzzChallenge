@@ -1,0 +1,66 @@
+package com.sri.cricbuzzandroidapp.json;
+
+import java.util.Set;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.sri.cricbuzzandroidapp.utils.ApplicationSettings;
+
+import android.content.Context;
+
+public class Player {
+
+		private JSONObject playerObject;
+		private Context context;
+		private boolean favorite;
+		public Player(JSONObject jsonObject, Context context) {
+			this.playerObject = jsonObject;
+			this.context = context;
+			Set<String> favoritePlayers = ApplicationSettings.getFavoritePlayer(context);
+			if (favoritePlayers == null) {
+				this.favorite = false;
+			}
+
+			for (String str : favoritePlayers) {
+				if (getId().equals(str)) {
+					this.favorite = true;
+				}
+			}
+
+			this.favorite = false;
+		}
+
+		public String getId() {
+			try {
+				return playerObject.getString("id");
+			} catch (JSONException e) {
+				return null;
+			}
+		}
+
+		public String getName() {
+			try {
+				return playerObject.getString("name");
+			} catch (JSONException e) {
+				return null;
+			}
+		}
+
+		public String getProfileUrl() {
+			try {
+				return playerObject.getString("url");
+			} catch (JSONException e) {
+				return null;
+			}
+		}
+
+		public String getJson() {
+			return playerObject.toString();
+		}
+
+		public void setFavorite(boolean favorite) {
+
+		}
+
+	}

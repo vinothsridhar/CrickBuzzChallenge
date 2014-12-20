@@ -1,0 +1,87 @@
+package com.sri.cricbuzzandroidapp;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
+import android.widget.Button;
+import android.widget.RatingBar;
+import android.widget.TextView;
+
+import com.sri.cricbuzzandroidapp.json.Player;
+import com.sri.cricbuzzandroidapp.json.Playlist;
+import com.sri.cricbuzzandroidapp.utils.ApplicationSettings;
+import com.sri.cricbuzzandroidapp.utils.L;
+
+public class PlayerProfile extends BaseActivity {
+
+	private Player player;
+	private Playlist playlist;
+
+	private TextView playerName;
+	private RatingBar ratingBar;
+	private Button test, odi, t20;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		addContentView(R.layout.activity_playerprofile);
+		initUI();
+		initComponents();
+	}
+
+	private void initUI() {
+		playerName = (TextView) findViewById(R.id.playerName);
+		ratingBar = (RatingBar) findViewById(R.id.ratingBar1);
+
+		test = (Button) findViewById(R.id.test);
+		odi = (Button) findViewById(R.id.odi);
+		t20 = (Button) findViewById(R.id.t20);
+	}
+
+	private void initComponents() {
+		JSONObject selectedObject;
+		try {
+			selectedObject = new JSONObject(ApplicationSettings.getSelectedJson(this));
+		} catch (JSONException e) {
+			return;
+		}
+
+		playlist = getPlaylist();
+		player = new Player(selectedObject, PlayerProfile.this);
+		showBack();
+		setTitleBar(player.getName());
+
+		renderPlayer();
+	}
+
+	private void renderPlayer() {
+		playerName.setText(player.getName());
+
+		if (player.isFavorite(ApplicationSettings.getFavoritePlayer(PlayerProfile.this))) {
+			ratingBar.setRating(1f);
+		} else {
+			ratingBar.setRating(0f);
+		}
+
+		ratingBar.setOnTouchListener(new OnTouchListener() {
+		    @Override
+		    public boolean onTouch(View v, MotionEvent event) {
+		        if (event.getAction() == MotionEvent.ACTION_UP) {
+		        	L.d("onrating changed");
+					if (ratingBar.getRating() == 1f) {
+						ratingBar.setRating(0f);
+						ApplicationSettings.removeFavoritePlayer(PlayerProfile.this, player.getId());
+					} else {
+						ApplicationSettings.addFavoritePlayer(PlayerProfile.this, player.getId());
+						ratingBar.setRating(1f);
+					}
+		        }
+		        return true;
+		    }
+		});
+	}
+}

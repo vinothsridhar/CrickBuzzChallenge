@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">CricBuzzAndroidApp</string>
+	<string name="loading_playlist_text">Loading Playlist</string>
+	<string name="total_players_text">Total Players: %1$s</string>
+	<string name="total_favorites_text">Favorites: %1$s</string>
+	<string name="test_text">TEST</string>
+	<string name="odi_text">ODI</string>
+	<string name="t20_text">T20</string>
+	<string name="info_text">INFO</string>
+	<string name="error_text">Network Error</string>
+</resources>

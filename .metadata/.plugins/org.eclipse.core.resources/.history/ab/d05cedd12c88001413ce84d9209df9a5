@@ -1,0 +1,21 @@
+package com.sri.cricbuzzandroidapp;
+
+import com.sri.cricbuzzandroidapp.api.AsyncConnection;
+import com.sri.cricbuzzandroidapp.api.ConnectionListener;
+import com.sri.cricbuzzandroidapp.utils.ServerUtils;
+
+import android.app.Activity;
+import android.os.AsyncTask;
+import android.os.Bundle;
+
+
+public class MainActivity extends Activity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        getPlaylist();
+    }
+}

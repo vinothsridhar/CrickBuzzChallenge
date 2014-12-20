@@ -1,0 +1,45 @@
+package com.sri.cricbuzzandroidapp;
+
+import com.sri.cricbuzzandroidapp.utils.L;
+
+import android.app.Activity;
+import android.os.Bundle;
+
+public class BaseActivity extends Activity {
+
+	private final String TAG = this.getClass().getSimpleName();
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		L.d(TAG, "Inside oncreate()");
+		super.onCreate(savedInstanceState);
+	}
+
+	@Override
+	protected void onStart() {
+		L.d(TAG, "Inside onStart()");
+		super.onStart();
+	}
+
+	@Override
+	protected void onResume() {
+		L.d(TAG, "Inside oncreate()");
+		super.onResume();
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+	}
+
+	@Override
+	public void finish() {
+		super.finish();
+	}
+
+}

@@ -1,0 +1,75 @@
+package com.sri.cricbuzzandroidapp;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.os.Bundle;
+import android.widget.RatingBar;
+import android.widget.TextView;
+import android.widget.RatingBar.OnRatingBarChangeListener;
+
+import com.sri.cricbuzzandroidapp.json.Player;
+import com.sri.cricbuzzandroidapp.json.Playlist;
+import com.sri.cricbuzzandroidapp.utils.ApplicationSettings;
+
+public class PlayerProfile extends BaseActivity {
+
+	private Player player;
+	private Playlist playlist;
+
+	private TextView playerName;
+	private RatingBar ratingBar;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		addContentView(R.layout.activity_playerprofile);
+		initUI();
+		initComponents();
+	}
+
+	private void initUI() {
+		playerName = (TextView) findViewById(R.id.playerName);
+		ratingBar = (RatingBar) findViewById(R.id.ratingBar1);
+	}
+
+	private void initComponents() {
+		JSONObject selectedObject;
+		try {
+			selectedObject = new JSONObject(ApplicationSettings.getSelectedJson(this));
+		} catch (JSONException e) {
+			return;
+		}
+
+		playlist = getPlaylist();
+		player = new Player(selectedObject, playlist.getFavorite());
+		showBack();
+		setTitleBar(player.getName());
+
+		renderPlayer();
+	}
+
+	private void renderPlayer() {
+		playerName.setText(player.getName());
+
+		if (player.isFavorite()) {
+			ratingBar.setRating(1f);
+		} else {
+			ratingBar.setRating(0f);
+		}
+
+		ratingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
+
+			@Override
+			public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+				if (player.isFavorite()) {
+					ratingBar.setRating(0);
+					ApplicationSettings.removeFavoritePlayer(PlayerProfile.this, player.getId());
+				} else {
+					ratingBar.setRating(1f);
+					ApplicationSettings.addFavoritePlayer(PlayerProfile.this, player.getId());
+				}
+			}
+		});
+	}
+}
